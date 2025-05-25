@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экскурсионные туры по Москве</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css для анимации текста -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #bfdbfe;
+            --accent-color: #e11d48;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 5rem 0;
+            color: white;
+            margin-bottom: 3rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .animate-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .carousel-section {
+            margin-bottom: 4rem;
+        }
+        
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        
+        .accordion-section {
+            max-width: 800px;
+            margin: 0 auto 5rem auto;
+        }
+        
+        .accordion-button {
+            font-weight: 600;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0,0,0,.125);
+        }
+        
+        .attraction-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        /* Стили для таблицы достопримечательностей */
+        .attractions-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .attractions-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .attractions-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+        }
+        
+        .attractions-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .attractions-table tr:hover td {
+            background-color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        .attraction-photo {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .animate-title {
+                font-size: 2.5rem;
+            }
+            
+            .carousel-item img {
+                height: 300px;
+            }
+            
+            .attractions-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Герой-секция с анимированным заголовком -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="animate-title animate__animated animate__fadeInDown animate__delay-1s">Откройте для себя Москву</h1>
+            <p class="lead animate__animated animate__fadeIn animate__delay-2s">Эксклюзивные экскурсии по самым знаковым местам столицы</p>
+        </div>
+    </section>
+
+    <!-- Карусель с фотографиями -->
+    <section class="carousel-section container">
+        <div id="moscowCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#moscowCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#moscowCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#moscowCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#moscowCarousel" data-bs-slide-to="3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Красная площадь">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Красная площадь</h5>
+                        <p>Сердце России и главная площадь страны</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1520106212299-d99c443e4568?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Храм Василия Блаженного">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Храм Василия Блаженного</h5>
+                        <p>Шедевр русской архитектуры XVI века</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://cdn.tripster.ru/thumbs2/b9bf3c02-cc91-11ed-8f2a-36833e93eaed.1600x900.jpeg?width=1200&height=630" class="d-block w-100" alt="Московский Кремль">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Московский Кремль</h5>
+                        <p>Исторический и политический центр России</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://s0.rbk.ru/v6_top_pics/media/img/6/05/346863218912056.jpeg" class="d-block w-100" alt="Москва-Сити">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Москва-Сити</h5>
+                        <p>Современный деловой центр столицы</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#moscowCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#moscowCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <!-- Прогрессбар под каруселью -->
+<div class="progress my-3" style="height: 8px;">
+    <div id="carouselProgressBar" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+
+
+    <!-- Аккордеон с достопримечательностями -->
+    <section class="accordion-section">
+        <div class="accordion" id="attractionsAccordion">
+            <div class="accordion-item mb-3 border-0 shadow-sm">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        <i class="fas fa-landmark attraction-icon"></i> Красная площадь
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#attractionsAccordion">
+                    <div class="accordion-body">
+                        <p>Красная площадь - главная площадь Москвы, расположенная в центре города. Это место, где происходили важнейшие события русской истории.</p>
+                        
+                        <table class="attractions-table">
+                            <thead>
+                                <tr>
+                                    <th>Место</th>
+                                    <th>Фото</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Мавзолей Ленина</td>
+                                    <td><img src="https://avatars.mds.yandex.net/i?id=57a312fd90bf96561ba33a226199ebb17da46d74-7755612-images-thumbs&n=13" alt="Мавзолей Ленина" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Государственный исторический музей</td>
+                                    <td><img src="https://cdn.culture.ru/images/8a5fd86e-ab03-58e5-a546-c2ab1d19b8c7" alt="Исторический музей" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>ГУМ - главный универмаг страны</td>
+                                    <td><img src="https://panorama.pub/storage/c5/76/2e1d7688c1fa987f2206ae828f71/previews/10276-meta-image-1600.jpg" alt="ГУМ" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Спасская башня с курантами</td>
+                                    <td><img src="https://ak-d.tripcdn.com/images/0101912000adm5vyq7377.jpg" alt="Спасская башня" class="attraction-photo"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>Площадь включена в список Всемирного наследия ЮНЕСКО и является обязательным пунктом посещения для всех туристов.</p>
+                        <img src="https://static.life.ru/publications/2022/7/6/616590658065.7673.jpg" alt="Красная площадь" class="img-fluid rounded mt-3">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item mb-3 border-0 shadow-sm">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                        <i class="fas fa-church attraction-icon"></i> Храм Василия Блаженного
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#attractionsAccordion">
+                    <div class="accordion-body">
+                        <p>Собор Покрова Пресвятой Богородицы, что на Рву, более известный как Храм Василия Блаженного - один из самых узнаваемых символов России. Построен в 1555-1561 годах по приказу Ивана Грозного в честь победы над Казанским ханством.</p>
+                        
+                        <table class="attractions-table">
+                            <thead>
+                                <tr>
+                                    <th>Архитектурная особенность</th>
+                                    <th>Фото</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>9 отдельных церквей на одном фундаменте</td>
+                                    <td><img src="https://avatars.mds.yandex.net/i?id=233353e5adbb9043a34a5bc7c2dab93b_l-5233919-images-thumbs&n=13" alt="Храм Василия Блаженного" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Уникальные купола, ни один из которых не повторяет другой</td>
+                                    <td><img src="https://www.gubkin.ru/faculty/humanities/chairs_and_departments/russian_language/uchebno-vospitatelnaya-rabota/18-11-2024/1/10.jpg" alt="Купола храма" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Богатейшая коллекция икон и церковной утвари</td>
+                                    <td><img src="https://avatars.mds.yandex.net/i?id=def9f2e1091c2a34c4611a28545f7caa_l-5232373-images-thumbs&n=13" alt="Иконы" class="attraction-photo"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <img src="https://images.unsplash.com/photo-1520106212299-d99c443e4568?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Храм Василия Блаженного" class="img-fluid rounded mt-3">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item mb-3 border-0 shadow-sm">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                        <i class="fas fa-fort-awesome attraction-icon"></i> Московский Кремль
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#attractionsAccordion">
+                    <div class="accordion-body">
+                        <p>Московский Кремль - исторический, культурный и политический центр России. Это самая крупная сохранившаяся крепость в Европе.</p>
+                        
+                        <table class="attractions-table">
+                            <thead>
+                                <tr>
+                                    <th>Достопримечательность</th>
+                                    <th>Фото</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Оружейная палата - музей-сокровищница</td>
+                                    <td><img src="https://static-basket-02.wbbasket.ru/vol22/travel/refacc079aaec-2024-07-03-08-27-06.jpg" alt="Оружейная палата" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Алмазный фонд с уникальными драгоценностями</td>
+                                    <td><img src="https://proza.ru/pics/2013/09/27/1278.jpg" alt="Алмазный фонд" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Грановитая палата - памятник архитектуры XV века</td>
+                                    <td><img src="https://avatars.mds.yandex.net/i?id=93b58b7f985075150b4278be9485c8736653f7b6-9099160-images-thumbs&n=13" alt="Грановитая палата" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Царь-пушка и Царь-колокол</td>
+                                    <td><img src="https://forum-ru-cdn.warthunder.com/original/3X/e/3/e34a9476a1d6b946bfa0313477fa327c4c6ed5bd.jpeg" alt="Царь-пушка" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Резиденция Президента России</td>
+                                    <td><img src="https://adm44.ru/upload/iblock/22a/figytc17268m2dh2pd5fvk5861580qnh/BolKremlDvorets.jpg" alt="Резиденция Президента" class="attraction-photo"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>Кремль включен в список Всемирного наследия ЮНЕСКО.</p>
+                        <img src="https://api.eric.s3storage.ru/super-static/prod/633574bf83c11b74c34534bb-1900x.jpeg" alt="Московский Кремль" class="img-fluid rounded mt-3">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item mb-3 border-0 shadow-sm">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                        <i class="fas fa-city attraction-icon"></i> Москва-Сити
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#attractionsAccordion">
+                    <div class="accordion-body">
+                        <p>Московский международный деловой центр "Москва-Сити" - это современный район небоскребов, символ новой, динамично развивающейся Москвы.</p>
+                        
+                        <table class="attractions-table">
+                            <thead>
+                                <tr>
+                                    <th>Объект</th>
+                                    <th>Фото</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Башня "Федерация" - самое высокое здание в Европе (374 м)</td>
+                                    <td><img src="https://avatars.mds.yandex.net/get-altay/2057543/2a0000016c705f32cb4b1f382193d147e5de/XXXL" alt="Башня Федерация" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Башня "Око" с панорамной площадкой на 354 метра</td>
+                                    <td><img src="https://vtb-league.com/app/uploads/2024/06/13h10_okko-690x530.jpg?1" alt="Башня Око" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Мост "Багратион" с торговой галереей</td>
+                                    <td><img src="https://resizer.mail.ru/p/3ddedbbb-7cd9-50b6-baf7-c5a27984962f/AQAKNJB7DL9QuU5hKNqMJm8V3PklWpQ4VVcgBHkzhHjt_VmkgGL_BiipJMC603bGBIhLSVOPtbG6R9VIpHT9Hokk4yk.png" alt="Мост Багратион" class="attraction-photo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Парк "Музеон" и набережная Тараса Шевченко</td>
+                                    <td><img src="https://sun9-5.userapi.com/s/v1/ig2/z2JSaCx2gEoOAa8Ik9a_4jym2yk3x5ONR_bVU4WtWuroviIsCfItgc8hT_1tKKGBMjXnvAVfpU0fveEHpvwhc2od.jpg?quality=96&as=32x20,48x30,72x46,108x68,160x101,240x152,360x228,480x304,540x342,640x405,720x456,900x570&from=bu&u=y6go-DacCuCaORq9YHBxLfhsQbXM-Vm-CgBwjEx4vOA&cs=900x570" alt="Парк Музеон" class="attraction-photo"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>Москва-Сити - это место, где можно увидеть Москву будущего.</p>
+                        <img src="https://avatars.dzeninfra.ru/get-zen_doc/3840910/pub_61d3000582149e7731365f6a_61d3001935163e7c5c6332c3/scale_1200" alt="Москва-Сити" class="img-fluid rounded mt-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <h3>Забронируйте тур прямо сейчас!</h3>
+            <p>+7 (495) 123-45-67 | info@moscow-tours.ru</p>
+            <p class="mb-0">© 2025 Экскурсионные туры по Москве. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = document.getElementById('moscowCarousel');
+        const progressBar = document.getElementById('carouselProgressBar');
+        const totalSlides = 4; // Всего слайдов
+        let currentIndex = 0;
+
+        carousel.addEventListener('slid.bs.carousel', function (event) {
+            // event.to - индекс нового активного слайда (0-based)
+            currentIndex = event.to;
+            let progressPercent = ((currentIndex + 1) / totalSlides) * 100;
+            progressBar.style.width = progressPercent + '%';
+            progressBar.setAttribute('aria-valuenow', progressPercent);
+        });
+    });
+</script>
+
+
+</body>
+</html>
